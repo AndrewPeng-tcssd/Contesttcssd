@@ -15,12 +15,15 @@ version = "v0.3"
 yellow = (255, 217, 3)
 black = (0, 0, 0)
 
-score_x = 950
-score_y = 16
+# the x and y position for scoreboard
+scoreboard_x = 950
+scoreboard_y = 16
 
+# the x and y position for win 
 win_x = 580
 win_y = 400
 
+# the x and y position for version
 Version_x = 560
 Version_y = 790
 
@@ -31,9 +34,11 @@ coins = []
 coins_collected = 0
 score = 0
 
-score_font = pygame.font.Font('freesansbold.ttf', 20)
+# fonts for all the texts
+scoreboard_font = pygame.font.Font('freesansbold.ttf', 20)
 win_font = pygame.font.Font('freesansbold.ttf', 100)
 version_font = pygame.font.Font('freesansbold.ttf', 9)
+
 
 platforms.append(plat)
 
@@ -53,14 +58,14 @@ def draw():
     pygame.draw.rect(window, (3, 252, 15), ground)  # draw ground
     p.draw(window, platforms)  # draw player
 
-    scoreboard = score_font.render(f"Coins collected: {coins_collected}/25 Score: {score} Time: {timer}s", True, yellow)
+    scoreboard = scoreboard_font.render(f"Coins collected: {coins_collected}/25 Score: {score} Time: {timer}s", True, yellow)
 
     win = win_font.render("You win!!!", True, yellow)
 
     Version = version_font.render(version, True, black)
 
-    Score_textRect = scoreboard.get_rect()
-    Score_textRect.center = (score_x, score_y)
+    scoreboard_textRect = scoreboard.get_rect()
+    scoreboard_textRect.center = (scoreboard_x, scoreboard_y)
 
     win_textRect = win.get_rect()
     win_textRect.center = (win_x, win_y)
@@ -68,9 +73,9 @@ def draw():
     Version_textRect = Version.get_rect()
     Version_textRect.center = (Version_x, Version_y)
 
-    window.blit(scoreboard, Score_textRect)
-    window.blit(Version, Version_textRect)
-    if coins_collected >= 25:
+    window.blit(scoreboard, scoreboard_textRect)  # displaying the scoreboard
+    window.blit(Version, Version_textRect)  # displaying the version
+    if coins_collected >= 25:  # checking if the player collects all 25 coins then display win
         window.blit(win, win_textRect)
     for platform in platforms:
         platform.draw(window)
